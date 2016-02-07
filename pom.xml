@@ -58,6 +58,23 @@
             <version>3.1.0-SNAPSHOT</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.jme3</groupId>
+            <artifactId>jme3-desktop</artifactId>
+            <version>3.1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jme3</groupId>
+            <artifactId>jme3-lwjgl</artifactId>
+            <version>3.1.0-SNAPSHOT</version>
+        </dependency>
+      <!--  <dependency>
+            <groupId>com.jme3</groupId>
+            <artifactId>jme3-plugins</artifactId>
+            <version>3.1.0-SNAPSHOT</version>
+        </dependency>-->
+
     </dependencies>
 
     <build>

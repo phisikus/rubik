@@ -1,12 +1,18 @@
 package pl.linux.platinum.phisikus
 
-object EntryPoint {
+import com.jme3.app.SimpleApplication
+import pl.linux.platinum.phisikus.gui.SimpleMonkeyDisplayer
 
-  def foo(x: Array[String]) = x.foldLeft("")((a, b) => a + b)
+
+object EntryPoint extends SimpleApplication {
+  val cubeDisplayer = new SimpleMonkeyDisplayer(this)
 
   def main(args: Array[String]) {
-    println("Hello World!")
-    println("concat arguments = " + foo(args))
+    this.start()
   }
 
+  @Override
+  def simpleInitApp(): Unit = {
+    cubeDisplayer.displayCube()
+  }
 }
