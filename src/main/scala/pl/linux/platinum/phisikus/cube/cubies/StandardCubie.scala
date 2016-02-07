@@ -5,4 +5,8 @@ package pl.linux.platinum.phisikus.cube.cubies
   */
 class StandardCubie(cubieColor: CubieColor.Value) extends Cubie {
   override def color: CubieColor.Value = cubieColor
+
+  override def toString: String = {
+    " " + cubieColor.toString + " "
+  }
 }

@@ -1,7 +1,19 @@
 package pl.linux.platinum.phisikus.cube
 
-/**
-  * Created by phisikus on 07.02.16.
-  */
+import pl.linux.platinum.phisikus.cube.sides.CubeSide
+
+
 trait Cube {
+  def north: CubeSide
+
+  def south: CubeSide
+
+  def east: CubeSide
+
+  def west: CubeSide
+
+  def top: CubeSide
+
+  def bottom: CubeSide
+
 }
