@@ -5,11 +5,23 @@ import com.jme3.material.Material
 import com.jme3.math.ColorRGBA
 import com.jme3.scene.Geometry
 import com.jme3.scene.shape.Box
+import com.jme3.system.AppSettings
 
 /**
   * Created by phisikus on 07.02.16.
   */
 class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends CubeDisplayer {
+
+
+  def setupGraphicsEngine = {
+    val settings = new AppSettings(true)
+    settings.setResolution(800, 600)
+    settings.setTitle("Rubik's Cube")
+    jMonkeyApplication.setDisplayStatView(false)
+    jMonkeyApplication.setShowSettings(false)
+    jMonkeyApplication.setDisplayFps(false)
+    jMonkeyApplication.setSettings(settings)
+  }
 
   override def displayCube(): Unit = {
     val assetManager = jMonkeyApplication.getAssetManager
@@ -21,6 +33,8 @@ class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends C
     boxGeometry.setMaterial(cubeMaterial)
     rootNode.attachChild(boxGeometry)
   }
+
+  setupGraphicsEngine
 
 
 }

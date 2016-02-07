@@ -11,8 +11,12 @@ object EntryPoint extends SimpleApplication {
     this.start()
   }
 
+  def entryPoint = {
+    cubeDisplayer.displayCube()
+  }
+
   @Override
   def simpleInitApp(): Unit = {
-    cubeDisplayer.displayCube()
+    this.entryPoint
   }
 }
