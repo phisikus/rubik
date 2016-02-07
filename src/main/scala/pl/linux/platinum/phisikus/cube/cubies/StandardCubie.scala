@@ -6,7 +6,6 @@ package pl.linux.platinum.phisikus.cube.cubies
 class StandardCubie(cubieColor: CubieColor.Value) extends Cubie {
   override def color: CubieColor.Value = cubieColor
 
-
   override def hashCode(): Int = 41 * super.hashCode() + cubieColor.hashCode()
 
   override def equals(o: scala.Any): Boolean = o match {

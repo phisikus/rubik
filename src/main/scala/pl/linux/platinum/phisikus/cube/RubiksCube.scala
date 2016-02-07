@@ -33,11 +33,29 @@ class RubiksCube(topSide: CubeSide, bottomSide: CubeSide, northSide: CubeSide, s
   override def east: CubeSide = eastSide
 
   override def toString: String = {
-    "North: " + northSide.toString +
-      "Top: " + topSide.toString +
-      "South: " + southSide.toString +
-      "West: " + westSide.toString +
-      "East: " + eastSide.toString +
-      "Bottom: " + bottomSide.toString
+    "North:\n" + northSide.toString +
+      "Top:\n" + topSide.toString +
+      "South:\n" + southSide.toString +
+      "West:\n" + westSide.toString +
+      "East:\n" + eastSide.toString +
+      "Bottom:\n" + bottomSide.toString
+  }
+
+  override def hashCode(): Int = {
+    (((((17 + north.hashCode()) * 13 + south.hashCode()) * 13 + east.hashCode()) * 13 + west.hashCode()) * 13 + top.hashCode()) * 13 + bottom.hashCode()
+  }
+
+  override def equals(o: scala.Any): Boolean = {
+    o match {
+      case toCompare: RubiksCube =>
+        north == toCompare.north &&
+          south == toCompare.south &&
+          east == toCompare.east &&
+          west == toCompare.west &&
+          top == toCompare.top &&
+          bottom == toCompare.bottom
+      case _ => false
+
+    }
   }
 }
