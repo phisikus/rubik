@@ -10,4 +10,5 @@ object CubieColor extends Enumeration {
   val YELLOW = Value("Y")
   val BLUE = Value("B")
   val ORANGE = Value("O")
+  val WHITE = Value("W")
 }
