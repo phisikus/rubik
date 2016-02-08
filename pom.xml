@@ -39,9 +39,14 @@
 
         <!-- Serializer -->
         <dependency>
-            <groupId>org.scala-lang.modules</groupId>
-            <artifactId>scala-pickling_${scala.compat.version}</artifactId>
-            <version>0.10.1</version>
+            <groupId>com.twitter</groupId>
+            <artifactId>chill_${scala.compat.version}</artifactId>
+            <version>0.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.twitter</groupId>
+            <artifactId>chill-all_${scala.compat.version}</artifactId>
+            <version>0.7.3</version>
         </dependency>
 
         <!-- Test -->

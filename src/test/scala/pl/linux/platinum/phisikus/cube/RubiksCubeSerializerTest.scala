@@ -13,7 +13,8 @@ class RubiksCubeSerializerTest extends FlatSpec{
   "RubiksCubeSerializer" should "serialize and deserialize to she same object" in {
     val objectToSerialize = new RubiksCube(4)
     val serializedString = serializer.serialize(objectToSerialize)
-    println(serializedString)
+    val deserializedObject = serializer.deserialize(serializedString)
+    assert(deserializedObject == objectToSerialize)
   }
 
 }

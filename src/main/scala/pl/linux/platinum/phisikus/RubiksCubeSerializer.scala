@@ -1,29 +1,31 @@
 package pl.linux.platinum.phisikus
 
-import pl.linux.platinum.phisikus.cube.{Cube, CubeSerializer}
+import java.io.ByteArrayOutputStream
 
-import scala.pickling._         // This imports names only
-import scala.pickling.json._    // Imports PickleFormat
-import scala.pickling.static._  // Avoid runtime pickler
+import com.esotericsoftware.kryo.io.Input
+import com.twitter.chill.{Output, ScalaKryoInstantiator}
+import pl.linux.platinum.phisikus.cube.{Cube, CubeSerializer, RubiksCube}
 
-// Import pickle ops
-import scala.pickling.Defaults.{ pickleOps, unpickleOps }
-// Alternatively import pickle function
-// import scala.pickling.functions._
-
-// Import picklers for specific types
-import scala.pickling.Defaults.{ stringPickler, intPickler, refUnpickler, nullPickler }
 /**
   * Created by phisikus on 08.02.16.
   */
 class RubiksCubeSerializer extends CubeSerializer {
 
-  override def serialize(cube: Cube): String = {
-//    val json = cube.pickle
-null
+  override def serialize(cube: RubiksCube) = {
+    val instantiator = new ScalaKryoInstantiator
+    instantiator.setRegistrationRequired(false)
+    val kryoInstantiator = instantiator.newKryo()
+    val outputStream = new ByteArrayOutputStream
+    val output = new Output(outputStream, 4096)
+    kryoInstantiator.writeObject(output, cube)
+    outputStream.toByteArray
   }
 
-  override def deserialize(text: String): Cube = {
-   null
+  override def deserialize(input: Array[Byte]): RubiksCube = {
+    val instantiator = new ScalaKryoInstantiator
+    instantiator.setRegistrationRequired(false)
+    val inputStream = new Input(input)
+    val kryoInstantiator = instantiator.newKryo()
+    kryoInstantiator.readObject(inputStream, classOf[RubiksCube])
   }
 }
