@@ -16,4 +16,8 @@ trait Cube {
 
   def bottom: CubeSide
 
+  def size : Integer
+
+  def isSolved : Boolean
+
 }

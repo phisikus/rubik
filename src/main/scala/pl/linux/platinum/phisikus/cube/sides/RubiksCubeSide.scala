@@ -1,7 +1,10 @@
 package pl.linux.platinum.phisikus.cube.sides
 
+import pl.linux.platinum.phisikus.cube.cubies.Cubie
 import pl.linux.platinum.phisikus.cube.cubies.CubieColor.CubieColor
-import pl.linux.platinum.phisikus.cube.cubies.{Cubie, StandardCubie}
+
+import scala.annotation.tailrec
+
 
 /**
   * Created by phisikus on 07.02.16.
@@ -9,14 +12,21 @@ import pl.linux.platinum.phisikus.cube.cubies.{Cubie, StandardCubie}
 class RubiksCubeSide(cubies: List[List[Cubie]]) extends CubeSide {
   override def elements: List[List[Cubie]] = cubies
 
-  def this(cubieColor: CubieColor) = {
-    this(List(
-      List(new StandardCubie(cubieColor), new StandardCubie(cubieColor), new StandardCubie(cubieColor)),
-      List(new StandardCubie(cubieColor), new StandardCubie(cubieColor), new StandardCubie(cubieColor)),
-      List(new StandardCubie(cubieColor), new StandardCubie(cubieColor), new StandardCubie(cubieColor))
-    ))
+  def this(cubieColor: CubieColor, size: Integer) = {
+    this(CubieMatrixFactory.getMatrixOfCubies(cubieColor, size))
   }
 
+
+  override def isSolved: Boolean = {
+    @tailrec
+    def allElementsAreEqual(list: List[Any]): Boolean = {
+      list match {
+        case e1 :: e2 :: tail => e1 == e2 && allElementsAreEqual(e2 :: tail)
+        case e1 => true
+      }
+    }
+    allElementsAreEqual(elements) && elements.map(singleRow => allElementsAreEqual(singleRow)).reduce((singleRow, result) => singleRow && result)
+  }
 
   override def equals(o: scala.Any): Boolean = o match {
     case toCompare: RubiksCubeSide => this.elements == toCompare.elements
@@ -25,7 +35,7 @@ class RubiksCubeSide(cubies: List[List[Cubie]]) extends CubeSide {
 
 
   override def hashCode(): Int = {
-    super.hashCode() * 31 + cubies.hashCode()
+    (super.hashCode() * 31 + cubies.hashCode()) * 31 + size
   }
 
   override def toString: String = {

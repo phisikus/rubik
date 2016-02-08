@@ -8,17 +8,20 @@ import pl.linux.platinum.phisikus.cube.sides.{CubeSide, RubiksCubeSide}
   */
 class RubiksCube(topSide: CubeSide, bottomSide: CubeSide, northSide: CubeSide, southSide: CubeSide, eastSide: CubeSide, westSide: CubeSide) extends Cube {
   def this(sides: List[CubeSide]) {
-    this(sides(0), sides(1), sides(2), sides(3), sides(4), sides(5))
+    this(sides.head, sides(1), sides(2), sides(3), sides(4), sides(5))
   }
 
-  def this() {
-    this(new RubiksCubeSide(CubieColor.WHITE),
-      new RubiksCubeSide(CubieColor.YELLOW),
-      new RubiksCubeSide(CubieColor.ORANGE),
-      new RubiksCubeSide(CubieColor.RED),
-      new RubiksCubeSide(CubieColor.BLUE),
-      new RubiksCubeSide(CubieColor.GREEN))
+  def this(size: Integer = 3) {
+    this(new RubiksCubeSide(CubieColor.WHITE, size),
+      new RubiksCubeSide(CubieColor.YELLOW, size),
+      new RubiksCubeSide(CubieColor.ORANGE, size),
+      new RubiksCubeSide(CubieColor.RED, size),
+      new RubiksCubeSide(CubieColor.BLUE, size),
+      new RubiksCubeSide(CubieColor.GREEN, size))
   }
+
+
+  override def size: Integer = northSide.size
 
   override def north: CubeSide = northSide
 
@@ -42,7 +45,7 @@ class RubiksCube(topSide: CubeSide, bottomSide: CubeSide, northSide: CubeSide, s
   }
 
   override def hashCode(): Int = {
-    (((((17 + north.hashCode()) * 13 + south.hashCode()) * 13 + east.hashCode()) * 13 + west.hashCode()) * 13 + top.hashCode()) * 13 + bottom.hashCode()
+    ((((((17 + north.hashCode()) * 13 + south.hashCode()) * 13 + east.hashCode()) * 13 + west.hashCode()) * 13 + top.hashCode()) * 13 + bottom.hashCode()) * 17 + size
   }
 
   override def equals(o: scala.Any): Boolean = {
@@ -57,5 +60,9 @@ class RubiksCube(topSide: CubeSide, bottomSide: CubeSide, northSide: CubeSide, s
       case _ => false
 
     }
+  }
+
+  override def isSolved: Boolean = {
+    north.isSolved && south.isSolved && east.isSolved && west.isSolved && top.isSolved && bottom.isSolved
   }
 }

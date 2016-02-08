@@ -8,4 +8,5 @@ import pl.linux.platinum.phisikus.cube.cubies.Cubie
 trait CubeSide {
   def size: Integer = elements.length
   def elements: List[List[Cubie]]
+  def isSolved : Boolean
 }
