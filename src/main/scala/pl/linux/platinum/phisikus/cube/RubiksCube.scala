@@ -1,7 +1,7 @@
 package pl.linux.platinum.phisikus.cube
 
-import pl.linux.platinum.phisikus.cube.cubies.CubieColor
-import pl.linux.platinum.phisikus.cube.sides.{CubeSide, RubiksCubeSide}
+import pl.linux.platinum.phisikus.cube.cubies.{Cubie, CubieColor}
+import pl.linux.platinum.phisikus.cube.sides.{CubeSidePosition, CubeSide, RubiksCubeSide}
 
 /**
   * Created by phisikus on 07.02.16.
@@ -64,5 +64,17 @@ class RubiksCube(topSide: CubeSide, bottomSide: CubeSide, northSide: CubeSide, s
 
   override def isSolved: Boolean = {
     north.isSolved && south.isSolved && east.isSolved && west.isSolved && top.isSolved && bottom.isSolved
+  }
+
+  override def getCubie(cubeSidePosition: CubeSidePosition.Value, row : Integer, column : Integer): Cubie = {
+    val side = cubeSidePosition match {
+      case CubeSidePosition.NORTH => north
+      case CubeSidePosition.SOUTH => south
+      case CubeSidePosition.EAST => east
+      case CubeSidePosition.WEST => west
+      case CubeSidePosition.TOP => top
+      case CubeSidePosition.BOTTOM => bottom
+    }
+    side.elements(row)(column)
   }
 }

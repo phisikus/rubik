@@ -39,9 +39,9 @@
 
         <!-- Serializer -->
         <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-scala_2.11</artifactId>
-            <version>2.6.3</version>
+            <groupId>org.scala-lang.modules</groupId>
+            <artifactId>scala-pickling_${scala.compat.version}</artifactId>
+            <version>0.10.1</version>
         </dependency>
 
         <!-- Test -->

@@ -1,6 +1,7 @@
 package pl.linux.platinum.phisikus.cube
 
-import pl.linux.platinum.phisikus.cube.sides.CubeSide
+import pl.linux.platinum.phisikus.cube.cubies.Cubie
+import pl.linux.platinum.phisikus.cube.sides.{CubeSide, CubeSidePosition}
 
 
 trait Cube {
@@ -16,8 +17,9 @@ trait Cube {
 
   def bottom: CubeSide
 
-  def size : Integer
+  def size: Integer
 
-  def isSolved : Boolean
+  def isSolved: Boolean
 
+  def getCubie(cubeSidePosition: CubeSidePosition.Value, row: Integer, column: Integer): Cubie
 }

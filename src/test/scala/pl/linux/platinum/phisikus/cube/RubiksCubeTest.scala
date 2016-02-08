@@ -95,9 +95,6 @@ class RubiksCubeTest extends FlatSpec {
     assert(!cube.isSolved)
     assert(!secondCube.isSolved)
 
-
-
   }
-
 
 }
