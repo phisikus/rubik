@@ -43,4 +43,12 @@ class RubiksCubeSide(cubies: List[List[Cubie]]) extends CubeSide {
       singleRow => singleRow.map(element => element.toString).reduce((singleElement, result) => singleElement + " " + result) + "\n"
     ).reduce((singleRow, result) => singleRow + result)
   }
+
+  override def getColumn(i: Integer): List[Cubie] = {
+    elements(i)
+  }
+
+  override def getRow(i: Integer): List[Cubie] = {
+    elements.map(column => column(i))
+  }
 }

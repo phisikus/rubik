@@ -38,11 +38,11 @@ object EntryPoint extends SimpleApplication {
       List(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
     ))
     )
-    //cubeDisplayer.displayCube(cube)
-    cam.setLocation(new Vector3f(90, 90, 10))
-    cam.lookAt(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0))
-    flyCam.setMoveSpeed(50f)
-    cubeNode = cubeDisplayer.displayCube(new RubiksCube(20))
+    cubeNode = cubeDisplayer.displayCube(cube)
+  //  cam.setLocation(new Vector3f(90, 90, 10))
+  //  cam.lookAt(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0))
+  //  flyCam.setMoveSpeed(50f)
+    //cubeNode = cubeDisplayer.displayCube(new RubiksCube(20))
   }
 
   @Override
@@ -51,6 +51,6 @@ object EntryPoint extends SimpleApplication {
   }
 
   override def simpleUpdate(tpf: Float): Unit = {
-    cubeNode.rotate(0.01f, 0.01f, 0.02f)
+  //  cubeNode.rotate(0.01f, 0.01f, 0.02f)
   }
 }

@@ -11,8 +11,6 @@ import pl.linux.platinum.phisikus.cube.cubies.CubieColor.CubieColor
 import pl.linux.platinum.phisikus.cube.cubies.{Cubie, CubieColor}
 import pl.linux.platinum.phisikus.cube.sides.CubeSide
 
-import scala.annotation.tailrec
-
 /**
   * Created by phisikus on 07.02.16.
   */
@@ -130,13 +128,14 @@ class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends C
     parentNode
   }
 
-
-  setupGraphicsEngine
-
   override def displayCube(cube: Cube): Node = {
     val rootNode = jMonkeyApplication.getRootNode
     val cubeNode = getCubeNode(cube)
     rootNode.attachChild(cubeNode)
     cubeNode
   }
+
+  setupGraphicsEngine
+
+
 }

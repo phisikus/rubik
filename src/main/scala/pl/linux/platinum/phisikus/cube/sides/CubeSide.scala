@@ -10,5 +10,7 @@ import pl.linux.platinum.phisikus.cube.cubies.Cubie
 trait CubeSide {
   def size: Integer = elements.length
   def elements: List[List[Cubie]]
+  def getColumn(i : Integer) : List[Cubie]
+  def getRow(i : Integer) : List[Cubie]
   def isSolved : Boolean
 }
