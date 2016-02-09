@@ -14,7 +14,7 @@ object EntryPoint extends SimpleApplication {
     this.start()
   }
 
-  def entryPoint = {
+  def entryPoint: Unit = {
     val cube = new RubiksCube(new RubiksCubeSide(List(
       List(new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.GREEN)),
       List(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
@@ -35,8 +35,8 @@ object EntryPoint extends SimpleApplication {
       List(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
     ))
     )
-    //cubeDisplayer.displayCube(cube)
-    cubeDisplayer.displayCube(new RubiksCube())
+    cubeDisplayer.displayCube(cube)
+    //cubeDisplayer.displayCube(new RubiksCube(5))
   }
 
   @Override

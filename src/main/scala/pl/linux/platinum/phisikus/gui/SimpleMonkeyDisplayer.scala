@@ -16,10 +16,10 @@ import pl.linux.platinum.phisikus.cube.sides.CubeSide
   */
 class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends CubeDisplayer {
 
-  def setupGraphicsEngine = {
+  def setupGraphicsEngine : Unit = {
     val settings = new AppSettings(true)
     settings.setResolution(800, 600)
-    settings.setFrameRate(1000)
+    settings.setFrameRate(50)
     settings.setTitle("Rubik's Cube")
     jMonkeyApplication.setDisplayStatView(false)
     jMonkeyApplication.setShowSettings(false)
@@ -90,13 +90,12 @@ class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends C
     topSide.rotate(FastMath.PI / 2, 0, 0.0f)
     topSide.move(0.0f, cube.size.toFloat * 2.0f - 1f, 1f)
 
-    // move right turn left
-    westSide.rotate(0.0f, -FastMath.PI / 2, 0.0f)
-    westSide.move(-1f, 0f, 1f)
 
-    // move left turn right
-    eastSide.rotate(0.0f, FastMath.PI / 2, 0.0f)
-    eastSide.move(cube.size.toFloat * 2 - 1f, 0f, cube.size.toFloat * 2f - 1f)
+    eastSide.rotate(FastMath.PI, -FastMath.PI / 2, FastMath.PI)
+    eastSide.move(-1f, 0f, cube.size.toFloat * 2 - 1f)
+
+    westSide.rotate(-FastMath.PI, FastMath.PI / 2, -FastMath.PI)
+    westSide.move(cube.size.toFloat * 2 - 1f, 0f, 1f)
 
     // move down fall back
     bottomSide.rotate(-FastMath.PI / 2, 0, 0.0f)
