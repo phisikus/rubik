@@ -1,7 +1,7 @@
 package pl.linux.platinum.phisikus.cube
 
 import org.scalatest.FlatSpec
-import pl.linux.platinum.phisikus.RubiksCubeSerializer
+import pl.linux.platinum.phisikus.serializers.RubiksCubeSerializer
 
 /**
   * Created by phisikus on 08.02.16.

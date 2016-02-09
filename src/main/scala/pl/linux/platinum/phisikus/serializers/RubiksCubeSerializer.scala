@@ -1,15 +1,15 @@
-package pl.linux.platinum.phisikus
+package pl.linux.platinum.phisikus.serializers
 
 import java.io.ByteArrayOutputStream
 
 import com.esotericsoftware.kryo.io.Input
 import com.twitter.chill.{Output, ScalaKryoInstantiator}
-import pl.linux.platinum.phisikus.cube.{CubeSerializer, RubiksCube}
+import pl.linux.platinum.phisikus.cube.RubiksCube
 
 /**
   * Created by phisikus on 08.02.16.
   */
-class RubiksCubeSerializer extends CubeSerializer {
+class RubiksCubeSerializer extends Serializer[RubiksCube] {
 
   val instantiator = new ScalaKryoInstantiator
   instantiator.setRegistrationRequired(false)
