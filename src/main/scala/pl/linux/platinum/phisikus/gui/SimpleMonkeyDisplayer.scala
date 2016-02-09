@@ -2,13 +2,13 @@ package pl.linux.platinum.phisikus.gui
 
 import com.jme3.app.SimpleApplication
 import com.jme3.material.Material
-import com.jme3.math.{ColorRGBA, Vector3f}
+import com.jme3.math.{ColorRGBA, FastMath}
 import com.jme3.scene.shape.Box
 import com.jme3.scene.{Geometry, Node}
 import com.jme3.system.AppSettings
 import pl.linux.platinum.phisikus.cube.Cube
-import pl.linux.platinum.phisikus.cube.cubies.Cubie
 import pl.linux.platinum.phisikus.cube.cubies.CubieColor.CubieColor
+import pl.linux.platinum.phisikus.cube.cubies.{Cubie, CubieColor}
 import pl.linux.platinum.phisikus.cube.sides.CubeSide
 
 /**
@@ -19,7 +19,7 @@ class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends C
   def setupGraphicsEngine = {
     val settings = new AppSettings(true)
     settings.setResolution(800, 600)
-    settings.setFrameRate(500)
+    settings.setFrameRate(1000)
     settings.setTitle("Rubik's Cube")
     jMonkeyApplication.setDisplayStatView(false)
     jMonkeyApplication.setShowSettings(false)
@@ -29,26 +29,26 @@ class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends C
 
   def getColorRGBA(color: CubieColor): ColorRGBA = {
 
-    //    color match {
-    //      case x if x == CubieColor.GREEN => ColorRGBA.Green
-    //      case x if x == CubieColor.RED => ColorRGBA.Red
-    //      case x if x == CubieColor.YELLOW => ColorRGBA.Yellow
-    //      case x if x == CubieColor.BLUE => ColorRGBA.Blue
-    //      case x if x == CubieColor.ORANGE => ColorRGBA.Orange
-    //      case x if x == CubieColor.WHITE => ColorRGBA.White
-    //      case _ => ColorRGBA.Pink
-    //    }
-    // TODO uncomment for real color
-    ColorRGBA.randomColor()
+    color match {
+      case x if x == CubieColor.GREEN => ColorRGBA.Green
+      case x if x == CubieColor.RED => ColorRGBA.Red
+      case x if x == CubieColor.YELLOW => ColorRGBA.Yellow
+      case x if x == CubieColor.BLUE => ColorRGBA.Blue
+      case x if x == CubieColor.ORANGE => ColorRGBA.Orange
+      case x if x == CubieColor.WHITE => ColorRGBA.White
+      case _ => ColorRGBA.Pink
+    }
+
   }
 
   def getCubieNode(name: String, x: Float, y: Float, z: Float, material: Material, colorRGBA: ColorRGBA): Node = {
     val box = new Box(1, 1, 0)
     val geometry = new Geometry(name + "_g", box)
-    geometry.setLocalTranslation(new Vector3f(x * 2, y * 2, z))
-    geometry.setMaterial(material.clone())
-    material.setColor("Color", colorRGBA)
+    val cubeMaterial = material.clone()
+    cubeMaterial.setColor("Color", colorRGBA)
+    geometry.setMaterial(cubeMaterial)
     val node = new Node(name)
+    node.move(x.toFloat * 2, y.toFloat * 2, z)
     node.attachChild(geometry)
     node
   }
@@ -79,8 +79,39 @@ class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends C
     val assetManager = jMonkeyApplication.getAssetManager
     val rootNode = jMonkeyApplication.getRootNode
     val cubeMaterial = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md")
-    val northSide = getCubeSideSceneNode("northSide", cubeMaterial, cube.north)
+    val northSide = getCubeSideSceneNode("northSide", cubeMaterial.clone(), cube.north)
+    val southSide = getCubeSideSceneNode("southSide", cubeMaterial, cube.south)
+    val eastSide = getCubeSideSceneNode("eastSide", cubeMaterial, cube.east)
+    val westSide = getCubeSideSceneNode("westSide", cubeMaterial, cube.west)
+    val topSide = getCubeSideSceneNode("topSide", cubeMaterial, cube.top)
+    val bottomSide = getCubeSideSceneNode("bottomSide", cubeMaterial, cube.bottom)
+
+    // nod down and levitate
+    topSide.rotate(FastMath.PI / 2, 0, 0.0f)
+    topSide.move(0.0f, cube.size.toFloat * 2.0f - 1f, 1f)
+
+    // move right turn left
+    eastSide.rotate(0.0f, -FastMath.PI / 2, 0.0f)
+    eastSide.move(-1f, 0f, 1f)
+
+    // move left turn right
+    westSide.rotate(0.0f, FastMath.PI / 2, 0.0f)
+    westSide.move(cube.size.toFloat * 2 - 1f, 0f, cube.size.toFloat * 2f - 1f)
+
+    // move down fall back
+    bottomSide.rotate(-FastMath.PI / 2, 0, 0.0f)
+    bottomSide.move(0.0f, -1f, cube.size.toFloat * 2.0f - 1f)
+
+    // move left twice turn right double
+    northSide.rotate(0.0f, FastMath.PI, 0.0f)
+    northSide.move(cube.size.toFloat * 2 - 2f, 0f, cube.size.toFloat * 2f)
+
     rootNode.attachChild(northSide)
+    rootNode.attachChild(southSide)
+    rootNode.attachChild(eastSide)
+    rootNode.attachChild(westSide)
+    rootNode.attachChild(topSide)
+    rootNode.attachChild(bottomSide)
   }
 
   setupGraphicsEngine

@@ -13,7 +13,7 @@ object EntryPoint extends SimpleApplication {
   }
 
   def entryPoint = {
-    cubeDisplayer.displayCube(new RubiksCube(3))
+    cubeDisplayer.displayCube(new RubiksCube(4))
   }
 
   @Override
