@@ -91,12 +91,12 @@ class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends C
     topSide.move(0.0f, cube.size.toFloat * 2.0f - 1f, 1f)
 
     // move right turn left
-    eastSide.rotate(0.0f, -FastMath.PI / 2, 0.0f)
-    eastSide.move(-1f, 0f, 1f)
+    westSide.rotate(0.0f, -FastMath.PI / 2, 0.0f)
+    westSide.move(-1f, 0f, 1f)
 
     // move left turn right
-    westSide.rotate(0.0f, FastMath.PI / 2, 0.0f)
-    westSide.move(cube.size.toFloat * 2 - 1f, 0f, cube.size.toFloat * 2f - 1f)
+    eastSide.rotate(0.0f, FastMath.PI / 2, 0.0f)
+    eastSide.move(cube.size.toFloat * 2 - 1f, 0f, cube.size.toFloat * 2f - 1f)
 
     // move down fall back
     bottomSide.rotate(-FastMath.PI / 2, 0, 0.0f)
