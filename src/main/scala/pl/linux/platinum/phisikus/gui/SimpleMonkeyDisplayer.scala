@@ -16,7 +16,7 @@ import pl.linux.platinum.phisikus.cube.sides.CubeSide
   */
 class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends CubeDisplayer {
 
-  def setupGraphicsEngine : Unit = {
+  def setupGraphicsEngine: Unit = {
     val settings = new AppSettings(true)
     settings.setResolution(800, 600)
     settings.setFrameRate(50)
@@ -42,7 +42,7 @@ class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends C
   }
 
   def getCubieNode(name: String, x: Float, y: Float, z: Float, material: Material, colorRGBA: ColorRGBA): Node = {
-    val box = new Box(1, 1, 0)
+    val box = new Box(0.99f, 0.99f, 0)
     val geometry = new Geometry(name + "_g", box)
     val cubeMaterial = material.clone()
     cubeMaterial.setColor("Color", colorRGBA)
@@ -75,6 +75,18 @@ class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends C
   }
 
 
+  def getInsideBox(size: Float, material: Material): Node = {
+    val box = new Box(size * 0.99f, size * 0.99f, size * 0.99f)
+    val geometry = new Geometry("insideBox_g", box)
+    val cubeMaterial = material.clone()
+    cubeMaterial.setColor("Color", ColorRGBA.Black)
+    geometry.setMaterial(cubeMaterial)
+    val node = new Node("insideBox")
+    node.move(size - 1f, size - 1f, size)
+    node.attachChild(geometry)
+    node
+  }
+
   override def displayCube(cube: Cube): Unit = {
     val assetManager = jMonkeyApplication.getAssetManager
     val rootNode = jMonkeyApplication.getRootNode
@@ -85,7 +97,7 @@ class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends C
     val westSide = getCubeSideSceneNode("westSide", cubeMaterial, cube.west)
     val topSide = getCubeSideSceneNode("topSide", cubeMaterial, cube.top)
     val bottomSide = getCubeSideSceneNode("bottomSide", cubeMaterial, cube.bottom)
-
+    val insideBox = getInsideBox(cube.size.toFloat, cubeMaterial)
     // nod down and levitate
     topSide.rotate(FastMath.PI / 2, 0, 0.0f)
     topSide.move(0.0f, cube.size.toFloat * 2.0f - 1f, 1f)
@@ -111,6 +123,7 @@ class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends C
     rootNode.attachChild(westSide)
     rootNode.attachChild(topSide)
     rootNode.attachChild(bottomSide)
+    rootNode.attachChild(insideBox)
   }
 
   setupGraphicsEngine

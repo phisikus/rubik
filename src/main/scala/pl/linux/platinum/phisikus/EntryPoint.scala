@@ -35,8 +35,8 @@ object EntryPoint extends SimpleApplication {
       List(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
     ))
     )
-    cubeDisplayer.displayCube(cube)
-    //cubeDisplayer.displayCube(new RubiksCube(5))
+    //cubeDisplayer.displayCube(cube)
+    cubeDisplayer.displayCube(new RubiksCube(5))
   }
 
   @Override
