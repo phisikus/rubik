@@ -62,14 +62,14 @@ class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends C
       cubies match {
         case head :: tail =>
           val position = cubieListSize - cubies.length
-          val x = position / sideSize
-          val y = position % sideSize
+          val y = (position / sideSize)
+          val x = (position % sideSize)
           getCubieNode(name + "_cubie_" + x.toString + ":" + y.toString, x.toFloat, y.toFloat, 0.0f, cubeMaterial, getColorRGBA(head.color)) :: getCubieNodes(sideSize, cubieListSize, tail)
         case _ => Nil
       }
     }
 
-    val cubieNodes = getCubieNodes(side.size, listOfCubies.length, listOfCubies)
+    val cubieNodes = getCubieNodes(side.size, listOfCubies.length, listOfCubies.reverse)
     cubieNodes.foreach(cubieNode => wall.attachChild(cubieNode))
     wall
   }
