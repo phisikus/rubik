@@ -11,6 +11,8 @@ import pl.linux.platinum.phisikus.cube.cubies.CubieColor.CubieColor
 import pl.linux.platinum.phisikus.cube.cubies.{Cubie, CubieColor}
 import pl.linux.platinum.phisikus.cube.sides.CubeSide
 
+import scala.annotation.tailrec
+
 /**
   * Created by phisikus on 07.02.16.
   */
@@ -18,7 +20,7 @@ class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends C
 
   def setupGraphicsEngine: Unit = {
     val settings = new AppSettings(true)
-    settings.setResolution(800, 600)
+    settings.setResolution(1024, 768)
     settings.setFrameRate(50)
     settings.setTitle("Rubik's Cube")
     jMonkeyApplication.setDisplayStatView(false)
@@ -87,17 +89,18 @@ class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends C
     node
   }
 
-  override def displayCube(cube: Cube): Unit = {
+  override def getCubeNode(cube: Cube): Node = {
     val assetManager = jMonkeyApplication.getAssetManager
-    val rootNode = jMonkeyApplication.getRootNode
+    val parentNode = new Node("rubiksCube")
     val cubeMaterial = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md")
-    val northSide = getCubeSideSceneNode("northSide", cubeMaterial.clone(), cube.north)
+    val northSide = getCubeSideSceneNode("northSide", cubeMaterial, cube.north)
     val southSide = getCubeSideSceneNode("southSide", cubeMaterial, cube.south)
     val eastSide = getCubeSideSceneNode("eastSide", cubeMaterial, cube.east)
     val westSide = getCubeSideSceneNode("westSide", cubeMaterial, cube.west)
     val topSide = getCubeSideSceneNode("topSide", cubeMaterial, cube.top)
     val bottomSide = getCubeSideSceneNode("bottomSide", cubeMaterial, cube.bottom)
     val insideBox = getInsideBox(cube.size.toFloat, cubeMaterial)
+
     // nod down and levitate
     topSide.rotate(FastMath.PI / 2, 0, 0.0f)
     topSide.move(0.0f, cube.size.toFloat * 2.0f - 1f, 1f)
@@ -117,16 +120,23 @@ class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends C
     northSide.rotate(0.0f, FastMath.PI, 0.0f)
     northSide.move(cube.size.toFloat * 2 - 2f, 0f, cube.size.toFloat * 2f)
 
-    rootNode.attachChild(northSide)
-    rootNode.attachChild(southSide)
-    rootNode.attachChild(eastSide)
-    rootNode.attachChild(westSide)
-    rootNode.attachChild(topSide)
-    rootNode.attachChild(bottomSide)
-    rootNode.attachChild(insideBox)
+    parentNode.attachChild(northSide)
+    parentNode.attachChild(southSide)
+    parentNode.attachChild(eastSide)
+    parentNode.attachChild(westSide)
+    parentNode.attachChild(topSide)
+    parentNode.attachChild(bottomSide)
+    parentNode.attachChild(insideBox)
+    parentNode
   }
+
 
   setupGraphicsEngine
 
-
+  override def displayCube(cube: Cube): Node = {
+    val rootNode = jMonkeyApplication.getRootNode
+    val cubeNode = getCubeNode(cube)
+    rootNode.attachChild(cubeNode)
+    cubeNode
+  }
 }
