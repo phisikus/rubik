@@ -1,7 +1,7 @@
 package pl.linux.platinum.phisikus.cube.sides
 
 import pl.linux.platinum.phisikus.cube.cubies.CubieColor._
-import pl.linux.platinum.phisikus.cube.cubies.StandardCubie
+import pl.linux.platinum.phisikus.cube.cubies.{Cubie, StandardCubie}
 
 /**
   * Created by phisikus on 08.02.16.
@@ -22,5 +22,23 @@ object CubieMatrixHelper {
     getVectorOfElements(size, getSingleRowOfElementsLambda)
 
   }
+
+
+  def getMatrixOfCubiesReplaceRow(position: Integer, row: Vector[Cubie], cubies: Vector[Vector[Cubie]]): Vector[Vector[Cubie]] = {
+    cubies.updated(position, row)
+  }
+
+  def getMatrixOfCubiesReplaceColumn(position: Integer, column: Vector[Cubie], cubies: Vector[Vector[Cubie]]): Vector[Vector[Cubie]] = {
+    cubies.zipWithIndex.map(row => row._1.updated(position, column(row._2)))
+  }
+
+  def getMatrixOfCubiesTurnedRight(cubies: Vector[Vector[Cubie]]): Vector[Vector[Cubie]] = {
+    cubies.transpose.map(row => row.reverse)
+  }
+
+  def getMatrxOfCubiesTurnedLeft(cubies: Vector[Vector[Cubie]]): Vector[Vector[Cubie]] = {
+    cubies.transpose.reverse
+  }
+
 
 }
