@@ -28,10 +28,10 @@ class RubiksCubeSideTest extends FlatSpec {
       List(new StandardCubie(CubieColor.ORANGE), new StandardCubie(CubieColor.GREEN), new StandardCubie(CubieColor.WHITE))
     )
     val side = new RubiksCubeSide(elements)
-    val firstColumn = elements.head
-    val lastColumn = elements.last
-    val firstRow = List(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.WHITE), new StandardCubie(CubieColor.ORANGE))
-    val lastRow = List(new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.ORANGE), new StandardCubie(CubieColor.WHITE))
+    val firstRow = elements.head
+    val lastRow = elements.last
+    val firstColumn = List(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.WHITE), new StandardCubie(CubieColor.ORANGE))
+    val lastColumn = List(new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.ORANGE), new StandardCubie(CubieColor.WHITE))
     assert(side.getColumn(0) == firstColumn)
     assert(side.getColumn(elements.size - 1) == lastColumn)
     assert(side.getRow(0) == firstRow)

@@ -45,10 +45,10 @@ class RubiksCubeSide(cubies: List[List[Cubie]]) extends CubeSide {
   }
 
   override def getColumn(i: Integer): List[Cubie] = {
-    elements(i)
+    elements.map(column => column(i))
   }
 
   override def getRow(i: Integer): List[Cubie] = {
-    elements.map(column => column(i))
+    elements(i)
   }
 }
