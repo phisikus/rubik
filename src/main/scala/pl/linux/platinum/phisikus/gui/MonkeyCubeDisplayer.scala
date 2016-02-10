@@ -14,7 +14,7 @@ import pl.linux.platinum.phisikus.cube.sides.CubeSide
 /**
   * Created by phisikus on 07.02.16.
   */
-class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends CubeDisplayer {
+class MonkeyCubeDisplayer(val jMonkeyApplication: SimpleApplication) extends CubeDisplayer {
 
   def setupGraphicsEngine: Unit = {
     val settings = new AppSettings(true)
