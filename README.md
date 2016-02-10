@@ -22,8 +22,8 @@ You can run tests using Maven:
 	java -jar ./target/rubik-*-jar-with-dependencies.jar
 	
 	
-	## License
-	Check LICENSE file.
+## License
+Check LICENSE file.
 
 
 
