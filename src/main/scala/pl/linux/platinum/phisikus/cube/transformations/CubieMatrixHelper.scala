@@ -1,4 +1,4 @@
-package pl.linux.platinum.phisikus.cube.sides
+package pl.linux.platinum.phisikus.cube.transformations
 
 import pl.linux.platinum.phisikus.cube.cubies.CubieColor._
 import pl.linux.platinum.phisikus.cube.cubies.{Cubie, StandardCubie}
@@ -36,7 +36,7 @@ object CubieMatrixHelper {
     cubies.transpose.map(row => row.reverse)
   }
 
-  def getMatrxOfCubiesTurnedLeft(cubies: Vector[Vector[Cubie]]): Vector[Vector[Cubie]] = {
+  def getMatrixOfCubiesTurnedLeft(cubies: Vector[Vector[Cubie]]): Vector[Vector[Cubie]] = {
     cubies.transpose.reverse
   }
 

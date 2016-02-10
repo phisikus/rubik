@@ -2,6 +2,7 @@ package pl.linux.platinum.phisikus.cube.sides
 
 import pl.linux.platinum.phisikus.cube.cubies.Cubie
 import pl.linux.platinum.phisikus.cube.cubies.CubieColor.CubieColor
+import pl.linux.platinum.phisikus.cube.transformations.CubieMatrixHelper
 
 import scala.annotation.tailrec
 
