@@ -17,8 +17,8 @@ object EntryPoint extends SimpleApplication {
     this.start()
   }
 
-  def entryPoint: Unit = {
-    val cube = new RubiksCube(new RubiksCubeSide(Vector(
+  def getSmallCube(): Cube = {
+    new RubiksCube(new RubiksCubeSide(Vector(
       Vector(new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.GREEN)),
       Vector(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
     )), new RubiksCubeSide(Vector(
@@ -38,22 +38,21 @@ object EntryPoint extends SimpleApplication {
       Vector(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
     ))
     )
-    //  cubeNode = cubeDisplayer.displayCube(cube)
-    //cam.setLocation(new Vector3f(90, 90, 10))
-    //cam.lookAt(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0))
-    flyCam.setMoveSpeed(50f)
+  }
 
+  def setCamera = {
+    // cam.setLocation(new Vector3f(90, 90, 10))
+    // cam.lookAt(new Vector3f(0, 0, 0), new Vector3f(0, 0, 0))
+    flyCam.setMoveSpeed(50f)
+  }
+
+  def entryPoint: Unit = {
+
+    setCamera
     val transformer = new RubiksCubeTransformer()
-    var x: Cube = new RubiksCube()
-    /*x = transformer.turnColumn(2, true, x)
-    x = transformer.turnColumn(0, true, x)
-    x = transformer.turnColumn(0, true, x)
-    x = transformer.turnColumn(0, false, x)
-    x = transformer.turnColumn(0, false, x)*/
-    //x = transformer.turnColumn(0, false, x)
-    /*x = transformer.turnColumn(0, true, x)
-    x = transformer.turnColumn(0, true, x)*/
-    x = transformer.turnRow(1, false, x)
+    var x: Cube = new RubiksCube(5)
+    x = transformer.turnSide(2, false, x)
+    //x = x.getRandomCube(x, 100000)
     cubeNode = cubeDisplayer.displayCube(x)
   }
 

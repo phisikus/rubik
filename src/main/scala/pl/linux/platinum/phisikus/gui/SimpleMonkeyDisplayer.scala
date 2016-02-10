@@ -42,7 +42,7 @@ class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends C
   }
 
   def getCubieNode(name: String, x: Float, y: Float, z: Float, material: Material, colorRGBA: ColorRGBA): Node = {
-    val box = new Box(0.99f, 0.99f, 0)
+    val box = new Box(0.98f, 0.98f, 0)
     val geometry = new Geometry(name + "_g", box)
     val cubeMaterial = material.clone()
     cubeMaterial.setColor("Color", colorRGBA)

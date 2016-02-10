@@ -81,5 +81,29 @@ class RubiksCubeTransformerTest extends FlatSpec {
     assert(transformedCube.isSolved)
   }
 
+  "RubiksCubeTransformer" should "properly turn rows, columns and sides combined" in {
+    val size = 10
+    val cube = new RubiksCube(size)
+    var transformedCube: Cube = cube
+    val transformer = new RubiksCubeTransformer
+
+    for (i <- 0 to size - 1) {
+      transformedCube = transformer.turnRow(i, false, transformedCube)
+      transformedCube = transformer.turnColumn(i, true, transformedCube)
+      transformedCube = transformer.turnSide(i, true, transformedCube)
+    }
+
+
+    for (i <- (size - 1) to 0 by -1) {
+      transformedCube = transformer.turnSide(i, false, transformedCube)
+      transformedCube = transformer.turnColumn(i, false, transformedCube)
+      transformedCube = transformer.turnRow(i, true, transformedCube)
+    }
+
+
+    assert(cube == transformedCube)
+    assert(transformedCube.isSolved)
+  }
+
 
 }

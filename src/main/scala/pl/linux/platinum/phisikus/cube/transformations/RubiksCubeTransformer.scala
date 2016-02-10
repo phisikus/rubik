@@ -10,13 +10,6 @@ import pl.linux.platinum.phisikus.cube.{Cube, RubiksCube}
 class RubiksCubeTransformer extends Transformer {
 
 
-  /** It turns rubik's cube column.
-    *
-    * @param position  speficies which column should be moved (0 .. n-1)
-    * @param clockWise clockwise rotation means movement from South side through Top to North side
-    * @param cube      source object to transform
-    * @return
-    */
   override def turnColumn(position: Integer, clockWise: Boolean, cube: Cube): Cube = {
     clockWise match {
       case true => turnColumnClockWise(position, cube)
@@ -90,13 +83,7 @@ class RubiksCubeTransformer extends Transformer {
     }
   }
 
-  /** Turns rubik's cube row.
-    *
-    * @param position  speficies which column should be moved (0 .. n-1)
-    * @param clockWise clockwise rotation means movement from West side through Top to East side
-    * @param cube      source object to transform
-    * @return
-    */
+
   override def turnRow(position: Integer, clockWise: Boolean, cube: Cube): Cube = {
     clockWise match {
       case true => turnRowCounterClockWise(position, cube)
@@ -153,5 +140,70 @@ class RubiksCubeTransformer extends Transformer {
     }
     new RubiksCube(topSide, bottomSide, northSide, southSide, eastSide, westSide)
   }
+
+  /** It turns rubik's cube side or one of those behind it.
+    *
+    * @param position side to turn (0 is North side)
+    * @param clockWise
+    * @param cube
+    * @return
+    */
+  override def turnSide(position: Integer, clockWise: Boolean, cube: Cube): Cube = {
+    clockWise match {
+      case true => turnSideClockWise(position, cube)
+      case false => turnSideCounterClockWise(position, cube)
+    }
+  }
+
+
+  private def turnSideClockWise(position: Integer, cube: Cube): Cube = {
+    val westSide = getCubeSideReplaceColumn(cube.size - 1 - position, cube.bottom.getRow(position), cube.west.elements)
+    val topSide = getCubeSideReplaceRow(cube.size - 1 - position, cube.west.getColumn(cube.size - 1 - position).reverse, cube.top.elements)
+    val eastSide = getCubeSideReplaceColumn(position, cube.top.getRow(cube.size - 1 - position), cube.east.elements)
+    val bottomSide = getCubeSideReplaceRow(position, cube.east.getColumn(position).reverse, cube.bottom.elements)
+    var northSide = cube.north
+    var southSide = cube.south
+
+    if (position == 0) {
+      southSide = turnSouthSide(true, cube.south)
+    }
+    if (position == (cube.size - 1)) {
+      northSide = turnNorthSide(true, cube.north)
+    }
+    new RubiksCube(topSide, bottomSide, northSide, southSide, eastSide, westSide)
+  }
+
+  private def turnSouthSide(clockWise: Boolean, cubeSide: CubeSide): CubeSide = {
+    clockWise match {
+      case true => new RubiksCubeSide(CubieMatrixHelper.getMatrixOfCubiesTurnedRight(cubeSide.elements))
+      case false => new RubiksCubeSide(CubieMatrixHelper.getMatrixOfCubiesTurnedLeft(cubeSide.elements))
+    }
+  }
+
+  private def turnNorthSide(clockWise: Boolean, cubeSide: CubeSide): CubeSide = {
+    clockWise match {
+      case false => new RubiksCubeSide(CubieMatrixHelper.getMatrixOfCubiesTurnedRight(cubeSide.elements))
+      case true => new RubiksCubeSide(CubieMatrixHelper.getMatrixOfCubiesTurnedLeft(cubeSide.elements))
+    }
+  }
+
+
+  private def turnSideCounterClockWise(position: Integer, cube: Cube): Cube = {
+    val westSide = getCubeSideReplaceColumn(cube.size - 1 - position, cube.top.getRow(cube.size - 1 - position).reverse, cube.west.elements)
+    val topSide = getCubeSideReplaceRow(cube.size - 1 - position, cube.east.getColumn(position), cube.top.elements)
+    val eastSide = getCubeSideReplaceColumn(position, cube.bottom.getRow(position).reverse, cube.east.elements)
+    val bottomSide = getCubeSideReplaceRow(position, cube.west.getColumn(cube.size - 1 - position), cube.bottom.elements)
+    var northSide = cube.north
+    var southSide = cube.south
+
+    if (position == 0) {
+      southSide = turnSouthSide(false, cube.south)
+    }
+    if (position == (cube.size - 1)) {
+      northSide = turnNorthSide(false, cube.north)
+    }
+    new RubiksCube(topSide, bottomSide, northSide, southSide, eastSide, westSide)
+  }
+
 
 }

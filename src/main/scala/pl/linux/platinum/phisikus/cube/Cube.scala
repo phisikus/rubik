@@ -29,4 +29,6 @@ trait Cube {
   def isSolved: Boolean
 
   def getCubie(cubeSidePosition: CubeSidePosition.Value, row: Integer, column: Integer): Cubie
+
+  def getRandomCube(cube : Cube, randomizations : Integer) : Cube
 }

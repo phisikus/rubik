@@ -1,7 +1,11 @@
 package pl.linux.platinum.phisikus.cube
 
+import _root_.pl.linux.platinum.phisikus.cube.transformations.{RubiksCubeTransformer, Transformer}
 import pl.linux.platinum.phisikus.cube.cubies.{Cubie, CubieColor}
-import pl.linux.platinum.phisikus.cube.sides.{CubeSidePosition, CubeSide, RubiksCubeSide}
+import pl.linux.platinum.phisikus.cube.sides.{CubeSide, CubeSidePosition, RubiksCubeSide}
+
+import scala.annotation.tailrec
+import scala.util.Random
 
 /**
   * Created by phisikus on 07.02.16.
@@ -20,6 +24,8 @@ class RubiksCube(topSide: CubeSide, bottomSide: CubeSide, northSide: CubeSide, s
       new RubiksCubeSide(CubieColor.GREEN, size))
   }
 
+  private val transformer: Transformer = new RubiksCubeTransformer
+  private val randomizer = new Random(System.currentTimeMillis());
 
   override def size: Integer = northSide.size
 
@@ -66,7 +72,7 @@ class RubiksCube(topSide: CubeSide, bottomSide: CubeSide, northSide: CubeSide, s
     north.isSolved && south.isSolved && east.isSolved && west.isSolved && top.isSolved && bottom.isSolved
   }
 
-  override def getCubie(cubeSidePosition: CubeSidePosition.Value, row : Integer, column : Integer): Cubie = {
+  override def getCubie(cubeSidePosition: CubeSidePosition.Value, row: Integer, column: Integer): Cubie = {
     val side = cubeSidePosition match {
       case CubeSidePosition.NORTH => north
       case CubeSidePosition.SOUTH => south
@@ -76,5 +82,22 @@ class RubiksCube(topSide: CubeSide, bottomSide: CubeSide, northSide: CubeSide, s
       case CubeSidePosition.BOTTOM => bottom
     }
     side.elements(row)(column)
+  }
+
+  @tailrec
+  override final def getRandomCube(cube: Cube, randomizations: Integer): Cube = {
+    randomizations match {
+      case x if x > 0 =>
+        randomizer.nextInt(5) match {
+          case 0 => getRandomCube(transformer.turnColumn(randomizer.nextInt(cube.size - 1), true, cube), randomizations - 1)
+          case 1 => getRandomCube(transformer.turnColumn(randomizer.nextInt(cube.size - 1), false, cube), randomizations - 1)
+          case 2 => getRandomCube(transformer.turnRow(randomizer.nextInt(cube.size - 1), true, cube), randomizations - 1)
+          case 3 => getRandomCube(transformer.turnRow(randomizer.nextInt(cube.size - 1), false, cube), randomizations - 1)
+          case 4 => getRandomCube(transformer.turnSide(randomizer.nextInt(cube.size - 1), true, cube), randomizations - 1)
+          case 5 => getRandomCube(transformer.turnSide(randomizer.nextInt(cube.size - 1), false, cube), randomizations - 1)
+        }
+      case _ => cube
+    }
+
   }
 }
