@@ -4,6 +4,9 @@ import pl.linux.platinum.phisikus.cube.cubies.Cubie
 import pl.linux.platinum.phisikus.cube.sides.{CubeSide, RubiksCubeSide}
 import pl.linux.platinum.phisikus.cube.{Cube, RubiksCube}
 
+import scala.annotation.tailrec
+import scala.util.Random
+
 /**
   * Created by phisikus on 10.02.16.
   */
@@ -200,6 +203,24 @@ class RubiksCubeTransformer extends Transformer {
       northSide = turnNorthSide(false, cube.north)
     }
     new RubiksCube(topSide, bottomSide, northSide, southSide, eastSide, westSide)
+  }
+
+  @tailrec
+  override final def getRandomCube(cube: Cube, randomizations: Integer): Cube = {
+    val randomizer = new Random(System.currentTimeMillis());
+    randomizations match {
+      case x if x > 0 =>
+        randomizer.nextInt(5) match {
+          case 0 => getRandomCube(turnColumn(randomizer.nextInt(cube.size - 1), true, cube), randomizations - 1)
+          case 1 => getRandomCube(turnColumn(randomizer.nextInt(cube.size - 1), false, cube), randomizations - 1)
+          case 2 => getRandomCube(turnRow(randomizer.nextInt(cube.size - 1), true, cube), randomizations - 1)
+          case 3 => getRandomCube(turnRow(randomizer.nextInt(cube.size - 1), false, cube), randomizations - 1)
+          case 4 => getRandomCube(turnSide(randomizer.nextInt(cube.size - 1), true, cube), randomizations - 1)
+          case 5 => getRandomCube(turnSide(randomizer.nextInt(cube.size - 1), false, cube), randomizations - 1)
+        }
+      case _ => cube
+    }
+
   }
 
 

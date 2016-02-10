@@ -33,4 +33,7 @@ trait Transformer {
     * @return cube with applied rotation
     */
   def turnSide(position: Integer, clockWise: Boolean, cube: Cube): Cube
+
+
+  def getRandomCube(cube: Cube, randomizations: Integer): Cube
 }

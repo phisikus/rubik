@@ -21,9 +21,6 @@ class RubiksCube(topSide: CubeSide, bottomSide: CubeSide, northSide: CubeSide, s
       new RubiksCubeSide(CubieColor.GREEN, size))
   }
 
-  private val transformer: Transformer = new RubiksCubeTransformer
-  private val randomizer = new Random(System.currentTimeMillis());
-
   override def size: Integer = northSide.size
 
   override def north: CubeSide = northSide
@@ -81,20 +78,5 @@ class RubiksCube(topSide: CubeSide, bottomSide: CubeSide, northSide: CubeSide, s
     side.elements(row)(column)
   }
 
-  @tailrec
-  override final def getRandomCube(cube: Cube, randomizations: Integer): Cube = {
-    randomizations match {
-      case x if x > 0 =>
-        randomizer.nextInt(5) match {
-          case 0 => getRandomCube(transformer.turnColumn(randomizer.nextInt(cube.size - 1), true, cube), randomizations - 1)
-          case 1 => getRandomCube(transformer.turnColumn(randomizer.nextInt(cube.size - 1), false, cube), randomizations - 1)
-          case 2 => getRandomCube(transformer.turnRow(randomizer.nextInt(cube.size - 1), true, cube), randomizations - 1)
-          case 3 => getRandomCube(transformer.turnRow(randomizer.nextInt(cube.size - 1), false, cube), randomizations - 1)
-          case 4 => getRandomCube(transformer.turnSide(randomizer.nextInt(cube.size - 1), true, cube), randomizations - 1)
-          case 5 => getRandomCube(transformer.turnSide(randomizer.nextInt(cube.size - 1), false, cube), randomizations - 1)
-        }
-      case _ => cube
-    }
 
-  }
 }
