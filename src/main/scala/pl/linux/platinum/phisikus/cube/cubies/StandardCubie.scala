@@ -8,7 +8,7 @@ class StandardCubie(cubieColor: CubieColor.Value) extends Cubie {
 
   override def hashCode(): Int = 41 * super.hashCode() + cubieColor.hashCode()
 
-  override def equals(o: scala.Any): Boolean = o match {
+  override def equals(toCompare: scala.Any): Boolean = toCompare match {
     case toCompare: StandardCubie => toCompare.color == this.color
     case _ => false
   }

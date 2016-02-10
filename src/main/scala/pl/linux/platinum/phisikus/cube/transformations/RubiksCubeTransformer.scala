@@ -141,13 +141,6 @@ class RubiksCubeTransformer extends Transformer {
     new RubiksCube(topSide, bottomSide, northSide, southSide, eastSide, westSide)
   }
 
-  /** It turns rubik's cube side or one of those behind it.
-    *
-    * @param position side to turn (0 is North side)
-    * @param clockWise
-    * @param cube
-    * @return
-    */
   override def turnSide(position: Integer, clockWise: Boolean, cube: Cube): Cube = {
     clockWise match {
       case true => turnSideClockWise(position, cube)

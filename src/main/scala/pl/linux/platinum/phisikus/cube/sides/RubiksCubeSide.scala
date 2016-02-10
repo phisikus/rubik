@@ -29,7 +29,7 @@ class RubiksCubeSide(cubies: Vector[Vector[Cubie]]) extends CubeSide {
     allElementsAreEqual(elements) && elements.map(singleRow => allElementsAreEqual(singleRow)).reduce((singleRow, result) => singleRow && result)
   }
 
-  override def equals(o: scala.Any): Boolean = o match {
+  override def equals(toCompare: scala.Any): Boolean = toCompare match {
     case toCompare: RubiksCubeSide => this.elements == toCompare.elements
     case _ => false
   }
