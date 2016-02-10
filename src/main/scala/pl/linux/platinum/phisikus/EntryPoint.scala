@@ -51,7 +51,7 @@ object EntryPoint extends SimpleApplication {
 
     setCamera
     val transformer = new RubiksCubeTransformer()
-    var x: Cube = new RubiksCube(50)
+    var x: Cube = new RubiksCube(3)
     x = x.getRandomCube(x, 100000)
     cubeNode = cubeDisplayer.displayCube(x)
   }

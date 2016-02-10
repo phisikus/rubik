@@ -1,7 +1,7 @@
 package pl.linux.platinum.phisikus.cube.sides
 
-/**
-  * Created by phisikus on 08.02.16.
+/** CubeSidePosition represents possible CubeSide positions in cube (Top/Bottom/North/South/East/West)
+  *
   */
 object CubeSidePosition extends Enumeration {
   type CubeSidePosition = Value

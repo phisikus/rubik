@@ -19,8 +19,9 @@ class RubiksCubeTransformer extends Transformer {
 
   private def turnColumnClockWise(position: Integer, cube: Cube): Cube = {
     // column moves through Bottom -> South -> Top -> North (here n - i position)
-    val northSide = getCubeSideReplaceColumn(cube.size - 1 - position, cube.top.getColumn(position), cube.north.elements)
-    val bottomSide = getCubeSideReplaceColumn(position, cube.north.getColumn(cube.size - 1 - position), cube.bottom.elements)
+    val reversedPosition = cube.size - 1 - position
+    val northSide = getCubeSideReplaceColumn(reversedPosition, cube.top.getColumn(position), cube.north.elements)
+    val bottomSide = getCubeSideReplaceColumn(position, cube.north.getColumn(reversedPosition), cube.bottom.elements)
     val southSide = getCubeSideReplaceColumn(position, cube.bottom.getColumn(position), cube.south.elements)
     val topSide = getCubeSideReplaceColumn(position, cube.south.getColumn(position), cube.top.elements)
     var eastSide = cube.east
@@ -49,10 +50,11 @@ class RubiksCubeTransformer extends Transformer {
 
   private def turnColumnCounterClockWise(position: Integer, cube: Cube): Cube = {
     // column moves through North (n-i position) -> Top -> South -> Bottom
-    val northSide = getCubeSideReplaceColumn(cube.size - 1 - position, cube.bottom.getColumn(position), cube.north.elements)
+    val reversedPosition = cube.size - 1 - position
+    val northSide = getCubeSideReplaceColumn(reversedPosition, cube.bottom.getColumn(position), cube.north.elements)
     val bottomSide = getCubeSideReplaceColumn(position, cube.south.getColumn(position), cube.bottom.elements)
     val southSide = getCubeSideReplaceColumn(position, cube.top.getColumn(position), cube.south.elements)
-    val topSide = getCubeSideReplaceColumn(position, cube.north.getColumn(cube.size - 1 - position), cube.top.elements)
+    val topSide = getCubeSideReplaceColumn(position, cube.north.getColumn(reversedPosition), cube.top.elements)
     var eastSide = cube.east
     var westSide = cube.west
 
@@ -150,9 +152,10 @@ class RubiksCubeTransformer extends Transformer {
 
 
   private def turnSideClockWise(position: Integer, cube: Cube): Cube = {
-    val westSide = getCubeSideReplaceColumn(cube.size - 1 - position, cube.bottom.getRow(position), cube.west.elements)
-    val topSide = getCubeSideReplaceRow(cube.size - 1 - position, cube.west.getColumn(cube.size - 1 - position).reverse, cube.top.elements)
-    val eastSide = getCubeSideReplaceColumn(position, cube.top.getRow(cube.size - 1 - position), cube.east.elements)
+    val reversedPosition = cube.size - 1 - position
+    val westSide = getCubeSideReplaceColumn(reversedPosition, cube.bottom.getRow(position), cube.west.elements)
+    val topSide = getCubeSideReplaceRow(reversedPosition, cube.west.getColumn(reversedPosition).reverse, cube.top.elements)
+    val eastSide = getCubeSideReplaceColumn(position, cube.top.getRow(reversedPosition), cube.east.elements)
     val bottomSide = getCubeSideReplaceRow(position, cube.east.getColumn(position).reverse, cube.bottom.elements)
     var northSide = cube.north
     var southSide = cube.south
@@ -182,10 +185,11 @@ class RubiksCubeTransformer extends Transformer {
 
 
   private def turnSideCounterClockWise(position: Integer, cube: Cube): Cube = {
-    val westSide = getCubeSideReplaceColumn(cube.size - 1 - position, cube.top.getRow(cube.size - 1 - position).reverse, cube.west.elements)
-    val topSide = getCubeSideReplaceRow(cube.size - 1 - position, cube.east.getColumn(position), cube.top.elements)
+    val reversedPosition = cube.size - 1 - position
+    val westSide = getCubeSideReplaceColumn(reversedPosition, cube.top.getRow(reversedPosition).reverse, cube.west.elements)
+    val topSide = getCubeSideReplaceRow(reversedPosition, cube.east.getColumn(position), cube.top.elements)
     val eastSide = getCubeSideReplaceColumn(position, cube.bottom.getRow(position).reverse, cube.east.elements)
-    val bottomSide = getCubeSideReplaceRow(position, cube.west.getColumn(cube.size - 1 - position), cube.bottom.elements)
+    val bottomSide = getCubeSideReplaceRow(position, cube.west.getColumn(reversedPosition), cube.bottom.elements)
     var northSide = cube.north
     var southSide = cube.south
 

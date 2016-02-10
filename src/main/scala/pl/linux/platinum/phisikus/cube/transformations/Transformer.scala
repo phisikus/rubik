@@ -2,8 +2,8 @@ package pl.linux.platinum.phisikus.cube.transformations
 
 import pl.linux.platinum.phisikus.cube.Cube
 
-/**
-  * Created by phisikus on 10.02.16.
+/** Transformer is an interface that represents possible transformations that can be applied to Rubik's Cube.
+  *
   */
 trait Transformer {
 

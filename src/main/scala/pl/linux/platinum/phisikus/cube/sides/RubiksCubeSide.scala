@@ -7,9 +7,6 @@ import pl.linux.platinum.phisikus.cube.transformations.CubieMatrixHelper
 import scala.annotation.tailrec
 
 
-/**
-  * Created by phisikus on 07.02.16.
-  */
 class RubiksCubeSide(cubies: Vector[Vector[Cubie]]) extends CubeSide {
   override def elements: Vector[Vector[Cubie]] = cubies
 

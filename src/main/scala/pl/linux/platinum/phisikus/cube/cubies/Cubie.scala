@@ -1,7 +1,7 @@
 package pl.linux.platinum.phisikus.cube.cubies
 
-/**
-  * Created by phisikus on 07.02.16.
+/** Cubie represents the smallest part of Rubik's Cube. Here Cubie represents one, colored side of a cubie.
+  *
   */
 trait Cubie {
   def color : CubieColor.Value
