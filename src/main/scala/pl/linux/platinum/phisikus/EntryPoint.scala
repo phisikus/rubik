@@ -45,14 +45,15 @@ object EntryPoint extends SimpleApplication {
 
     val transformer = new RubiksCubeTransformer()
     var x: Cube = new RubiksCube()
-    x = transformer.turnColumn(2, true, x)
+    /*x = transformer.turnColumn(2, true, x)
     x = transformer.turnColumn(0, true, x)
     x = transformer.turnColumn(0, true, x)
     x = transformer.turnColumn(0, false, x)
-    x = transformer.turnColumn(0, false, x)
+    x = transformer.turnColumn(0, false, x)*/
     //x = transformer.turnColumn(0, false, x)
     /*x = transformer.turnColumn(0, true, x)
     x = transformer.turnColumn(0, true, x)*/
+    x = transformer.turnRow(1, false, x)
     cubeNode = cubeDisplayer.displayCube(x)
   }
 
