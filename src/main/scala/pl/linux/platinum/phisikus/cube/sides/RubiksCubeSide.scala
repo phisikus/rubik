@@ -13,7 +13,7 @@ class RubiksCubeSide(cubies: List[List[Cubie]]) extends CubeSide {
   override def elements: List[List[Cubie]] = cubies
 
   def this(cubieColor: CubieColor, size: Integer) = {
-    this(CubieMatrixFactory.getMatrixOfCubies(cubieColor, size))
+    this(CubieMatrixHelper.getMatrixOfCubies(cubieColor, size))
   }
 
 

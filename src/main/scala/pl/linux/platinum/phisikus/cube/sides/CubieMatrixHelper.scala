@@ -6,7 +6,7 @@ import pl.linux.platinum.phisikus.cube.cubies.StandardCubie
 /**
   * Created by phisikus on 08.02.16.
   */
-object CubieMatrixFactory {
+object CubieMatrixHelper {
 
   def getMatrixOfCubies(cubieColor: CubieColor, size: Integer) = {
 
