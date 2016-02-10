@@ -5,6 +5,7 @@ import pl.linux.platinum.phisikus.cube.Cube
 
 
 trait CubeDisplayer {
-  def getCubeNode(cube: Cube) : Node
-  def displayCube(cube: Cube) : Node
+  def getCubeNode(cube: Cube): Node
+
+  def displayCube(cube: Cube): Node
 }

@@ -7,8 +7,12 @@ import pl.linux.platinum.phisikus.cube.cubies.Cubie
   */
 trait CubeSide {
   def size: Integer = elements.length
+
   def elements: Vector[Vector[Cubie]]
-  def getColumn(i : Integer) : Vector[Cubie]
-  def getRow(i : Integer) : Vector[Cubie]
-  def isSolved : Boolean
+
+  def getColumn(i: Integer): Vector[Cubie]
+
+  def getRow(i: Integer): Vector[Cubie]
+
+  def isSolved: Boolean
 }

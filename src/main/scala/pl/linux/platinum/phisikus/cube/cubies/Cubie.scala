@@ -4,5 +4,5 @@ package pl.linux.platinum.phisikus.cube.cubies
   *
   */
 trait Cubie {
-  def color : CubieColor.Value
+  def color: CubieColor.Value
 }

@@ -31,5 +31,5 @@ trait Cube {
 
   def getCubie(cubeSidePosition: CubeSidePosition.Value, row: Integer, column: Integer): Cubie
 
-  def getRandomCube(cube : Cube, randomizations : Integer) : Cube
+  def getRandomCube(cube: Cube, randomizations: Integer): Cube
 }

@@ -6,7 +6,7 @@ import pl.linux.platinum.phisikus.serializers.RubiksCubeSerializer
 /**
   * Created by phisikus on 08.02.16.
   */
-class RubiksCubeSerializerTest extends FlatSpec{
+class RubiksCubeSerializerTest extends FlatSpec {
 
   val serializer = new RubiksCubeSerializer
 
