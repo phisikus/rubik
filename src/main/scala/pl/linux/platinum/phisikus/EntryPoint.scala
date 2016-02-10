@@ -18,24 +18,24 @@ object EntryPoint extends SimpleApplication {
   }
 
   def entryPoint: Unit = {
-    val cube = new RubiksCube(new RubiksCubeSide(List(
-      List(new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.GREEN)),
-      List(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
-    )), new RubiksCubeSide(List(
-      List(new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.GREEN)),
-      List(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
-    )), new RubiksCubeSide(List(
-      List(new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.GREEN)),
-      List(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
-    )), new RubiksCubeSide(List(
-      List(new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.GREEN)),
-      List(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
-    )), new RubiksCubeSide(List(
-      List(new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.GREEN)),
-      List(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
-    )), new RubiksCubeSide(List(
-      List(new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.GREEN)),
-      List(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
+    val cube = new RubiksCube(new RubiksCubeSide(Vector(
+      Vector(new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.GREEN)),
+      Vector(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
+    )), new RubiksCubeSide(Vector(
+      Vector(new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.GREEN)),
+      Vector(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
+    )), new RubiksCubeSide(Vector(
+      Vector(new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.GREEN)),
+      Vector(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
+    )), new RubiksCubeSide(Vector(
+      Vector(new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.GREEN)),
+      Vector(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
+    )), new RubiksCubeSide(Vector(
+      Vector(new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.GREEN)),
+      Vector(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
+    )), new RubiksCubeSide(Vector(
+      Vector(new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.GREEN)),
+      Vector(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.YELLOW))
     ))
     )
     cubeNode = cubeDisplayer.displayCube(cube)

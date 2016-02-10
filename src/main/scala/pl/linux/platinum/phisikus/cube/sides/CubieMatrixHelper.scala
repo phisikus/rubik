@@ -10,16 +10,16 @@ object CubieMatrixHelper {
 
   def getMatrixOfCubies(cubieColor: CubieColor, size: Integer) = {
 
-    def getListOfElements[X](quantity: Integer, factory: () => X): List[X] = {
+    def getVectorOfElements[X](quantity: Integer, factory: () => X): Vector[X] = {
       quantity match {
-        case x if x > 0 => factory() :: getListOfElements(x - 1, factory)
-        case _ => List()
+        case x if x > 0 => Vector(factory()) ++ getVectorOfElements(x - 1, factory)
+        case _ => Vector()
       }
     }
 
     val getSingleCubieLambda = () => new StandardCubie(cubieColor)
-    val getSingleRowOfElementsLambda = () => getListOfElements(size, getSingleCubieLambda)
-    getListOfElements(size, getSingleRowOfElementsLambda)
+    val getSingleRowOfElementsLambda = () => getVectorOfElements(size, getSingleCubieLambda)
+    getVectorOfElements(size, getSingleRowOfElementsLambda)
 
   }
 

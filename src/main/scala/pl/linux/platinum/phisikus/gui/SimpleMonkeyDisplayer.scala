@@ -58,14 +58,14 @@ class SimpleMonkeyDisplayer(val jMonkeyApplication: SimpleApplication) extends C
     val wall = new Node(name)
     val listOfCubies = side.elements.flatten
 
-    def getCubieNodes(sideSize: Int, cubieListSize: Int, cubies: List[Cubie]): List[Node] = {
+    def getCubieNodes(sideSize: Int, cubieVectorSize: Int, cubies: Vector[Cubie]): Vector[Node] = {
       cubies match {
-        case head :: tail =>
-          val position = cubieListSize - cubies.length
+        case head +: tail =>
+          val position = cubieVectorSize - cubies.length
           val y = (position / sideSize)
           val x = (position % sideSize)
-          getCubieNode(name + "_cubie_" + x.toString + ":" + y.toString, x.toFloat, y.toFloat, 0.0f, cubeMaterial, getColorRGBA(head.color)) :: getCubieNodes(sideSize, cubieListSize, tail)
-        case _ => Nil
+          Vector(getCubieNode(name + "_cubie_" + x.toString + ":" + y.toString, x.toFloat, y.toFloat, 0.0f, cubeMaterial, getColorRGBA(head.color))) ++ getCubieNodes(sideSize, cubieVectorSize, tail)
+        case _ => Vector()
       }
     }
 

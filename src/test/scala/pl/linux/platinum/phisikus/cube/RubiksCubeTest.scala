@@ -32,8 +32,8 @@ class RubiksCubeTest extends FlatSpec {
     assert(cubeToCompare != cube)
   }
 
-  "RubiksCube" should "be created properly from List of sides" in {
-    val sides = List(
+  "RubiksCube" should "be created properly from Vector of sides" in {
+    val sides = Vector(
       new RubiksCubeSide(CubieColor.GREEN, 5),
       new RubiksCubeSide(CubieColor.GREEN, 2),
       new RubiksCubeSide(CubieColor.GREEN, 1),
@@ -76,10 +76,10 @@ class RubiksCubeTest extends FlatSpec {
       new RubiksCubeSide(CubieColor.YELLOW, size),
       new RubiksCubeSide(CubieColor.ORANGE, size),
       new RubiksCubeSide(CubieColor.RED, size),
-      new RubiksCubeSide(List(
-        List(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.BLUE)),
-        List(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.BLUE)),
-        List(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.BLUE))
+      new RubiksCubeSide(Vector(
+        Vector(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.BLUE)),
+        Vector(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.BLUE)),
+        Vector(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.RED), new StandardCubie(CubieColor.BLUE))
       )))
 
     val secondCube = new RubiksCube(new RubiksCubeSide(CubieColor.GREEN, size),
@@ -87,10 +87,10 @@ class RubiksCubeTest extends FlatSpec {
       new RubiksCubeSide(CubieColor.YELLOW, size),
       new RubiksCubeSide(CubieColor.ORANGE, size),
       new RubiksCubeSide(CubieColor.RED, size),
-      new RubiksCubeSide(List(
-        List(new StandardCubie(CubieColor.YELLOW), new StandardCubie(CubieColor.YELLOW), new StandardCubie(CubieColor.YELLOW)),
-        List(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.BLUE)),
-        List(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.BLUE))
+      new RubiksCubeSide(Vector(
+        Vector(new StandardCubie(CubieColor.YELLOW), new StandardCubie(CubieColor.YELLOW), new StandardCubie(CubieColor.YELLOW)),
+        Vector(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.BLUE)),
+        Vector(new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.BLUE), new StandardCubie(CubieColor.BLUE))
       )))
     assert(!cube.isSolved)
     assert(!secondCube.isSolved)

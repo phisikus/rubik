@@ -9,8 +9,8 @@ import scala.annotation.tailrec
 /**
   * Created by phisikus on 07.02.16.
   */
-class RubiksCubeSide(cubies: List[List[Cubie]]) extends CubeSide {
-  override def elements: List[List[Cubie]] = cubies
+class RubiksCubeSide(cubies: Vector[Vector[Cubie]]) extends CubeSide {
+  override def elements: Vector[Vector[Cubie]] = cubies
 
   def this(cubieColor: CubieColor, size: Integer) = {
     this(CubieMatrixHelper.getMatrixOfCubies(cubieColor, size))
@@ -19,9 +19,9 @@ class RubiksCubeSide(cubies: List[List[Cubie]]) extends CubeSide {
 
   override def isSolved: Boolean = {
     @tailrec
-    def allElementsAreEqual(list: List[Any]): Boolean = {
+    def allElementsAreEqual(list: Vector[Any]): Boolean = {
       list match {
-        case e1 :: e2 :: tail => e1 == e2 && allElementsAreEqual(e2 :: tail)
+        case e1 +: e2 +: tail => e1 == e2 && allElementsAreEqual(Vector(e2) ++ tail)
         case e1 => true
       }
     }
@@ -44,11 +44,11 @@ class RubiksCubeSide(cubies: List[List[Cubie]]) extends CubeSide {
     ).reduce((singleRow, result) => singleRow + result)
   }
 
-  override def getColumn(i: Integer): List[Cubie] = {
+  override def getColumn(i: Integer): Vector[Cubie] = {
     elements.map(column => column(i))
   }
 
-  override def getRow(i: Integer): List[Cubie] = {
+  override def getRow(i: Integer): Vector[Cubie] = {
     elements(i)
   }
 }

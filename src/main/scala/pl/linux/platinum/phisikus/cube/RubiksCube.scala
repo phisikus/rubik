@@ -7,7 +7,7 @@ import pl.linux.platinum.phisikus.cube.sides.{CubeSidePosition, CubeSide, Rubiks
   * Created by phisikus on 07.02.16.
   */
 class RubiksCube(topSide: CubeSide, bottomSide: CubeSide, northSide: CubeSide, southSide: CubeSide, eastSide: CubeSide, westSide: CubeSide) extends Cube {
-  def this(sides: List[CubeSide]) {
+  def this(sides: Vector[CubeSide]) {
     this(sides.head, sides(1), sides(2), sides(3), sides(4), sides(5))
   }
 
