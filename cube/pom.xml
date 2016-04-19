@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>pl.linux.platinum.phisikus</groupId>
-    <artifactId>rubik</artifactId>
+    <artifactId>cube</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>${project.artifactId}</name>
-    <packaging>pom</packaging>
+    <description>Rubik's cube presentation</description>
     <inceptionYear>2016</inceptionYear>
     <licenses>
         <license>
@@ -13,6 +13,12 @@
             <url>http://www.gnu.org/licenses/gpl.txt</url>
         </license>
     </licenses>
+
+    <parent>
+		<groupId>pl.linux.platinum.phisikus</groupId>
+		<artifactId>rubik</artifactId>
+		<version>1.0-SNAPSHOT</version>	    
+    </parent>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -22,10 +28,60 @@
         <scala.compat.version>2.11</scala.compat.version>
     </properties>
 
-    <modules>
-        <module>cube</module>
-    </modules>
+    <repositories>
+        <repository>
+            <id>JMonkeyEngine</id>
+            <url>http://updates.jmonkeyengine.org/maven</url>
+        </repository>
+    </repositories>
 
+    <dependencies>
+        <!-- Scala -->
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+
+        <!-- Serializer -->
+        <dependency>
+            <groupId>com.twitter</groupId>
+            <artifactId>chill_${scala.compat.version}</artifactId>
+            <version>0.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.twitter</groupId>
+            <artifactId>chill-all_${scala.compat.version}</artifactId>
+            <version>0.7.3</version>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_${scala.compat.version}</artifactId>
+            <version>3.0.0-M12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JMonkeyEngine -->
+        <dependency>
+            <groupId>com.jme3</groupId>
+            <artifactId>jme3-core</artifactId>
+            <version>3.1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jme3</groupId>
+            <artifactId>jme3-desktop</artifactId>
+            <version>3.1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jme3</groupId>
+            <artifactId>jme3-lwjgl</artifactId>
+            <version>3.1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <sourceDirectory>src/main/scala</sourceDirectory>
@@ -66,6 +122,25 @@
                     </includes>
                     <skipTests>true</skipTests>
                 </configuration>
+            </plugin>
+            <!-- Scala Testing Plugin -->
+            <plugin>
+                <groupId>org.scalatest</groupId>
+                <artifactId>scalatest-maven-plugin</artifactId>
+                <version>1.0</version>
+                <configuration>
+                    <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+                    <junitxml>.</junitxml>
+                    <filereports>WDF TestSuite.txt</filereports>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>test</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <!-- JAR building -->
             <plugin>
