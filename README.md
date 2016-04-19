@@ -18,8 +18,8 @@ You can run tests using Maven:
 	mvn package
   
 ...and run it using:
-
-	java -jar ./target/rubik-*-jar-with-dependencies.jar
+   
+     java -jar ./cube-viewer/target/cube-viewer-*-jar-with-dependencies.jar
 	
 	
 ## License
